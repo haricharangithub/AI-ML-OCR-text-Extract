@@ -1,9 +1,20 @@
-streamlit
-easyocr
-opencv-python-headless
-numpy
-pillow
-pyyaml
-torch
+# OCR and Image Processing
 pytesseract
+Pillow>=9.0.0
+opencv-python
+numpy
+easyocr
+
+# Streamlit for UI
+streamlit
+
+# Utilities
+pandas
+matplotlib
+seaborn
+
+# PDF processing (for reading requirements)
+PyPDF2
+
+# JSON handling (built-in json is sufficient)
 
