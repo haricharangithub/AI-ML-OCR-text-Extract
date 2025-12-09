@@ -5,6 +5,7 @@ from typing import List
 import cv2
 import numpy as np
 import streamlit as st
+import pytesseract
 
 from src.ocr_engine import OcrEngine
 from src.preprocessing import preprocess
@@ -61,8 +62,13 @@ def main():
         image_data = load_image(selected_sample)
 
     if image_data is not None:
-        preprocessed, lines, target = run_ocr(image_data)
-        render_results(preprocessed, lines, target)
+        try:
+            preprocessed, lines, target = run_ocr(image_data)
+            render_results(preprocessed, lines, target)
+        except pytesseract.TesseractNotFoundError:
+            st.error("Tesseract binary not found. Please install system package (e.g., `apt-get install tesseract-ocr`) and set PATH or TESSERACT_CMD.")
+        except ImportError as e:
+            st.error(f"Dependency error: {e}")
     else:
         st.info("Upload an image or pick a sample to start.")
 
